@@ -3,12 +3,12 @@ include_directories(
     ${CMAKE_SOURCE_DIR}/src
     ${CMAKE_SOURCE_DIR}/plugins/system-update
     ${CMAKE_SOURCE_DIR}/tests/mocks/plugins/system-update
-    /usr/include/apt-pkg/
+    /usr/include//
 )
 
 set(PLUGIN_LIBS
     UpdatePlugin
-    apt-pkg
+    
 )
 
 set(MOCK_SYSTEMUPDATE_SRCS

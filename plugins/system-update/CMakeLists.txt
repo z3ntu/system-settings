@@ -16,7 +16,7 @@ set(QML_SOURCES
 include_directories(
     ${CMAKE_CURRENT_BINARY_DIR}
     ${CMAKE_CURRENT_SOURCE_DIR}
-    /usr/include/apt-pkg/
+    /usr/include//
 )
 
 add_library(UpdatePlugin SHARED
@@ -35,7 +35,7 @@ add_library(UpdatePlugin SHARED
     network/accessmanager_impl.cpp
 
     helpers.cpp
-    update.cpp
+    
     updatedb.cpp
     updatemodel.cpp
     updatemanager.cpp
@@ -48,7 +48,7 @@ target_link_libraries(UpdatePlugin
     Qt5::Quick
     Qt5::Sql
 
-    apt-pkg
+    
     uss-systemimage
 )
 
