@@ -69,7 +69,5 @@ set(PUSH_HELPER_DIR "lib/ubuntu-push-client/legacy-helpers")
 
 SET(CMAKE_INSTALL_RPATH "${PLUGIN_MODULE_DIR}")
 
-add_subdirectory(lib)
-include_directories(lib)
 include_directories(src)
 add_subdirectory(tests)
