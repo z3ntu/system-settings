@@ -18,7 +18,6 @@
 #ifndef TESTUTIL_H
 #define TESTUTIL_H
 
-#include "TouchEventSequenceWrapper.h"
 #include <QtQuick/QQuickItem>
 
 class QTouchDevice;
@@ -31,16 +30,6 @@ class TestUtil : public QObject
 public:
     TestUtil(QObject *parent = 0);
     ~TestUtil();
-
-    Q_INVOKABLE bool isInstanceOf(QObject*, QString);
-    Q_INVOKABLE TouchEventSequenceWrapper *touchEvent();
-
-private:
-    void ensureTargetWindow();
-    void ensureTouchDevice();
-
-    QWindow *m_targetWindow;
-    QTouchDevice *m_touchDevice;
 };
 
 QML_DECLARE_TYPE(TestUtil)
