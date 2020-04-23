@@ -18,8 +18,10 @@
  *
 */
 
+#warning "system-update plugin.h"
 #ifndef PLUGIN_H
 #define PLUGIN_H
+#warning "system-update plugin.h2"
 
 #include <QtQml/QQmlEngine>
 #include <QtQml/QQmlExtensionPlugin>

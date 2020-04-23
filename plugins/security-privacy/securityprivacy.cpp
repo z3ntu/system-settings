@@ -521,5 +521,3 @@ void managerLoaded(GObject    *object,
     SecurityPrivacy *plugin(static_cast<SecurityPrivacy *>(user_data));
     plugin->managerLoaded();
 }
-
-#include "securityprivacy.moc"
