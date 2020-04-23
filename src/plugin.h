@@ -23,58 +23,12 @@
 #define SYSTEM_SETTINGS_PLUGIN_H
 
 #include <QObject>
-#include <QQmlComponent>
-#include <QStringList>
-#include <QUrl>
-
-class QFileInfo;
 
 namespace SystemSettings {
 
-class PluginPrivate;
 class Plugin: public QObject
 {
     Q_OBJECT
-    Q_PROPERTY(QQmlComponent *entryComponent READ entryComponent CONSTANT)
-    Q_PROPERTY(QQmlComponent *pageComponent READ pageComponent CONSTANT)
-    Q_PROPERTY(QString displayName READ displayName NOTIFY displayNameChanged)
-    Q_PROPERTY(QString baseName READ baseName CONSTANT)
-    Q_PROPERTY(QUrl icon READ icon NOTIFY iconChanged)
-    Q_PROPERTY(QString category READ category CONSTANT)
-    Q_PROPERTY(int priority READ priority CONSTANT)
-    Q_PROPERTY(QString translations READ translations CONSTANT)
-    Q_PROPERTY(QStringList keywords READ keywords NOTIFY keywordsChanged)
-    Q_PROPERTY(bool visible READ isVisible NOTIFY visibilityChanged)
-    Q_PROPERTY(bool hideByDefault READ hideByDefault CONSTANT)
-
-public:
-    explicit Plugin(const QFileInfo &manifest, QObject *parent = 0);
-    ~Plugin();
-
-    QString baseName() const;
-    QString displayName() const;
-    QUrl icon() const;
-    QString category() const;
-    int priority() const;
-    QString translations() const;
-    QStringList keywords() const;
-    bool isVisible() const;
-    bool hideByDefault() const;
-
-    void reset();
-
-    QQmlComponent *entryComponent();
-    QQmlComponent *pageComponent();
-
-Q_SIGNALS:
-    void displayNameChanged();
-    void iconChanged();
-    void keywordsChanged();
-    void visibilityChanged();
-
-private:
-    PluginPrivate *d_ptr;
-    Q_DECLARE_PRIVATE(Plugin)
 };
 
 } // namespace
