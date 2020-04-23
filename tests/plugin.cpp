@@ -16,7 +16,6 @@
 
 
 #include "plugin.h"
-#include "testutil.h"
 
 #include <qqml.h>
 #include <QQmlEngine>
