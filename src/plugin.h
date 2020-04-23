@@ -1,3 +1,4 @@
+#warning src/plugin.h
 /*
  * This file is part of system-settings
  *
