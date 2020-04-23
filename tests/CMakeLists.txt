@@ -1,30 +1,32 @@
 include_directories(
     ../src
     ${CMAKE_CURRENT_BINARY_DIR}
-    ${GLIB_INCLUDE_DIRS}
-    ${QTDBUSMOCK_INCLUDE_DIRS}
-    ${QTDBUSTEST_INCLUDE_DIRS}
 )
 
-set(XVFB_CMD xvfb-run -a -s "-screen 0 640x480x24")
+add_definitions(-DQT_NO_KEYWORDS)
 
-add_definitions(-DI18N_DOMAIN="ubuntu-system-settings")
-add_definitions(-DPLUGIN_PRIVATE_MODULE_DIR="${PLUGIN_PRIVATE_MODULE_DIR}")
-add_definitions(-DPLUGIN_MODULE_DIR="${CMAKE_CURRENT_BINARY_DIR}")
-add_definitions(-DMANIFEST_DIR="data")
-add_definitions(-DPLUGIN_MANIFEST_DIR="${CMAKE_CURRENT_SOURCE_DIR}/data")
-add_definitions(-DQML_TEST_DIR="${CMAKE_CURRENT_SOURCE_DIR}")
-add_definitions(-DQML_DIR="${CMAKE_CURRENT_BINARY_DIR}")
-add_definitions(-DPLUGIN_QML_DIR="${CMAKE_CURRENT_BINARY_DIR}")
-add_definitions(-DSYSTEM_IMAGE_DBUS_TEMPLATE="${CMAKE_SOURCE_DIR}/tests/autopilot/ubuntu_system_settings/tests/systemimage.py")
-add_definitions(-DI18N_DOMAIN="ubuntu-system-settings")
+set(UbuntuTestQML_SOURCES
+    testutil.cpp
+    plugin.cpp
+    TouchEventSequenceWrapper.cpp
+)
 
+include_directories(
+    ${CMAKE_CURRENT_SOURCE_DIR}
+    ${Qt5Gui_PRIVATE_INCLUDE_DIRS}
+    )
 
-add_subdirectory(utils)
+add_library(UbuntuTestQml MODULE ${UbuntuTestQML_SOURCES})
 
-# QML tests that require graphical capabilities.
-add_custom_target(qmluitests)
-add_dependencies(qmluitests UbuntuTest)
+target_link_libraries(UbuntuTestQml Qt5::Core Qt5::Quick Qt5::Test)
 
-add_custom_target(qmltests)
-add_dependencies(qmltests qmluitests)
+# copy qml files into build directory for shadow builds
+file(GLOB QML_JS_FILES *.js *.qml qmldir)
+
+add_custom_target(UbuntuTestQmlJsFiles ALL
+    COMMAND cp ${QML_JS_FILES} ${CMAKE_CURRENT_BINARY_DIR}
+    DEPENDS ${QML_JS_FILES}
+)
+
+add_custom_target(UbuntuTest)
+add_dependencies(UbuntuTest UbuntuTestQml UbuntuTestQmlJsFiles)
